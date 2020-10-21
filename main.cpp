@@ -27,7 +27,12 @@ using namespace cv;
 
 
 int main()
-{
+{ 
+  string reponse;
+  cout << "Choisir image ou video (ecrire <image> ou <video>) : " << endl;
+  cin >> reponse;
+  if (reponse == "video")
+  {
 
 int Tab[13][2]
 	{ 
@@ -128,5 +133,38 @@ VideoWriter oVideoWriter("/home/root/capture-liv1.avi", CV_FOURCC('M', 'J', 'P',
     oVideoWriter.release();
 
     destroyAllWindows();
-	return 0;
+	return 0;}
+  else 
+	if (reponse == "image"){
+      // open the first webcam plugged in the computer
+    VideoCapture cap(0);
+    if (!cap.isOpened()) {
+        cout << "ERROR: Could not open camera" << endl;
+        return 1;
+    }
+
+
+    // this will contain the image from the webcam
+    Mat frame;
+        
+    // capture the next frame from the webcam
+    cap >> frame;
+
+    bool isSuccess = imwrite("/home/root/image.jpg", frame);
+
+     if (isSuccess == false)
+ {
+  cout << "Failed to save the image" << endl;
+  cin.get(); //wait for a key press
+  return -1;
+ }
+
+    cout << "Image is succusfully saved to a file" << endl;
+    // display the frame until you press a key
+    cap.release();
+    destroyAllWindows();
+    return 0;
+  }
+  else
+    return 0;
 }
