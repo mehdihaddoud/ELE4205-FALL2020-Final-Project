@@ -81,8 +81,3 @@ return difference;
 
 
 
-
-
-
-
-
