@@ -13,11 +13,33 @@
 #include "DieWithMessage.cpp"
 #include "AddressUtility.cpp"
 #include "captureImage.cpp"
+#define OK 1
+#define QUIT 0
 
-//#include "TCPServerUtility.cpp"
 
 using namespace std;
 using namespace cv;
+
+void sendInt(int controle, char* tosend, int sock){
+  	tosend = (char*)&(controle);
+	 int remaining = sizeof(int);
+	 int result = 0;
+	 int sent = 0;
+	while(remaining > 0){
+		result = send(sock, tosend+sent,remaining,0);
+		if (result > 0){
+		remaining -= result;
+		sent += remaining;
+		}
+	
+	else if(result < 0){
+		cout << "Error!" <<endl;
+		break;
+	}
+	}
+	
+	
+}
 
 static const int MAXPENDING = 5; // Maximum outstanding connection requests
 
@@ -72,48 +94,16 @@ char* recv_buffer;
 	}
     Mat image;
 	
+	char* tosend;
   while(true){
 	
 	cap >> image;
-	/* bool isSuccess = imwrite("/home/root/wesh.jpg",image);
-	if (isSuccess == false){
-		cout << "Failed to save the image" << endl;
-	}
-	else{
-		cout << "Image is succesfully saved to a file" << endl;
-	} */
-	char* tosend = (char*)&(image.rows);
-	int remaining = sizeof(int);
-	int result = 0;
-	int sent = 0;
-	while(remaining > 0){
-		result = send(clntSock, tosend+sent,remaining,0);
-		if (result > 0){
-		remaining -= result;
-		sent += remaining;
-		}
-	
-	else if(result < 0){
-		cout << "Error!" <<endl;
-		break;
-	}
-	}
-	tosend = (char*)&(image.cols);
-	remaining = sizeof(int);
-	sent = 0;
-	result = 0;
-	while(remaining > 0){
-	result = send(clntSock, tosend+sent,remaining,0);
-	if (result > 0){
-	remaining -= result;
-	sent += remaining;
-	}
-	
-	else if(result < 0){
-	cout << "Error!" <<endl;
-	break;
-	}
-	}
+
+	sendInt(image.rows, tosend,clntSock);
+
+
+	sendInt(image.cols, tosend, clntSock);
+
 	int bytes;
 	image = (image.reshape(0,1));
 	int imgSize = image.total() * image.elemSize();
@@ -121,15 +111,13 @@ char* recv_buffer;
     if (bytes < 0){ 
          cout<<"ERROR writing to socket";
 }
-	//HandleTCPClient(clntSock);
-	//cap.release();
-	//destroyAllWindows();
+	
 	
 int controle=0;
 recv_buffer = (char*)&controle;
-remaining = sizeof(int);
+int remaining = sizeof(int);
 int received =0;
-result = 0;
+int result = 0;
 while(remaining > 0){
 	result = recv(clntSock, recv_buffer+received, remaining,0);
 	if(result > 0){
@@ -137,8 +125,6 @@ while(remaining > 0){
 		received += result;
 	}
 	else if (result ==0){
-		//cout << "Remote side closed his end of the connection before all data was received." <<endl;
-		//break;
 	}
 	else if (result < 0){
 		cout << "ERROR!" << endl;
@@ -147,25 +133,43 @@ while(remaining > 0){
 	
 }
 
-if (controle == 0){
+if (controle == QUIT){
 	  close(clntSock);
 
 	break;
 }
+
+  if (controle == OK){
+	  continue;
+  }
+
+if (controle == 2){
+    cap.set(CV_CAP_PROP_FRAME_WIDTH, 320);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT,240);
+}
+if (controle == 3){
+    cap.set(CV_CAP_PROP_FRAME_WIDTH, 176);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT,144);
+
+}
+
+if (controle == 4){
+	cap.set(CV_CAP_PROP_FRAME_WIDTH,960);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT,544);
+
+}
+
+if (controle == 5){
+	cap.set(CV_CAP_PROP_FRAME_WIDTH,800);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT,600);
+
+}
+
   }
   
   break;
 
   }
   exit(0);
-  // NOT REACHED
 }
 
-/* Mat frame;
-frame = (frame.reshape(0,1)); // to make it continuous
-
-int  imgSize = frame.total()*frame.elemSize();
-
-// Send data here
-bytes = send(clientSock, frame.data, imgSize, 0))
- */

@@ -13,8 +13,30 @@
 #include "AddressUtility.cpp"
 #include "DieWithMessage.cpp"
 //#include "TCPClientUtility.c"
+#define OK 1
+#define QUIT 0
 using namespace std;
 using namespace cv;
+void sendInt(int controle, char* tosend, int sock){
+  	tosend = (char*)&(controle);
+	 int remaining = sizeof(int);
+	 int result = 0;
+	 int sent = 0;
+	while(remaining > 0){
+		result = send(sock, tosend+sent,remaining,0);
+		if (result > 0){
+		remaining -= result;
+		sent += remaining;
+		}
+	
+	else if(result < 0){
+		cout << "Error!" <<endl;
+		break;
+	}
+	}
+	
+	
+}
 int main(int argc, char *argv[]) {
 
   if (argc < 3 || argc > 4) // Test for correct number of arguments
@@ -49,6 +71,13 @@ int main(int argc, char *argv[]) {
   if (connect(sock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
 	  
     DieWithSystemMessage("connect() failed");
+	cout << "Bonjour!" << endl;
+	cout << "En appuyant sur les touches suivantes, vous changez la configuration:"<<endl;
+	cout << "a : 176 x 144" << endl;
+	cout << "b : 960 x 544" << endl;
+cout << "c : 800 x 600" <<endl;
+cout << "d : 320 * 240" <<endl; 	
+int controle;	
 	 while(true){
 int height = 0;
 int length = 0;
@@ -117,45 +146,34 @@ for (int i = 0;  i < img.rows; i++) {
 }
 	string window_name = "My Camera Feed";
   imshow(window_name, img); 
-  
-  if(waitKey(30) != -1){
-	int controle = 0;
-  	tosend = (char*)&(controle);
-	 remaining = sizeof(int);
-	 result = 0;
-	 int sent = 0;
-	while(remaining > 0){
-		result = send(sock, tosend+sent,remaining,0);
-		if (result > 0){
-		remaining -= result;
-		sent += remaining;
-		}
-	
-	else if(result < 0){
-		cout << "Error!" <<endl;
-		break;
-	}
-	}
+  int touche = waitKey(30); 
+  if(touche == 27){
+	controle = QUIT;
+	sendInt(controle, tosend, sock);
 	break;
+  } else if(touche == 97){
+	 controle = 2;
+	 sendInt(controle, tosend, sock);
   }
-	int controle = 1;
-  	tosend = (char*)&(controle);
-	 remaining = sizeof(int);
-	 result = 0;
-	 int sent = 0;
-	while(remaining > 0){
-		result = send(sock, tosend+sent,remaining,0);
-		if (result > 0){
-		remaining -= result;
-		sent += remaining;
-		}
+else if(touche == 98){
+	controle = 3;
+	sendInt(controle, tosend, sock);
+}
+else if(touche == 99){
+	controle = 4;
+	sendInt(controle, tosend, sock);
 	
-	else if(result < 0){
-		cout << "Error!" <<endl;
-		break;
-	}
-	}
-
+	
+}  
+  else if (touche == 100){
+	 controle = 5;
+	sendInt(controle, tosend, sock);
+	  
+  }
+  else{
+	controle = OK;
+	sendInt(controle, tosend, sock);
+	 } 
   
 }
   close(sock);
