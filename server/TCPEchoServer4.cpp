@@ -9,13 +9,20 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <time.h>
+#include <fstream>
 #include "Practical.h"
 #include "DieWithMessage.cpp"
 #include "AddressUtility.cpp"
 #include "captureImage.cpp"
 #define OK 1
 #define QUIT 0
-
+#define RES01 2
+#define RES02 3
+#define RES03 4
+#define RES04 5
+#define READY 6
+#define IDOWN 7
+#define PUSHB 8
 
 using namespace std;
 using namespace cv;
@@ -40,6 +47,54 @@ void sendInt(int controle, char* tosend, int sock){
 	
 	
 }
+
+int receiveInt(char* recv_buffer, int sock){ 
+int number;	
+recv_buffer = (char*)&number;
+int remaining = sizeof(int);
+int received =0;
+int result = 0;
+while(remaining > 0){
+	result = recv(sock, recv_buffer+received, remaining,0);
+	if(result > 0){
+		remaining -= result;
+		received += result;
+	}
+	else if (result ==0){
+	}
+	else if (result < 0){
+		cout << "ERROR!" << endl;
+		break;
+	}
+	
+}
+	return number;
+}
+
+int getValue(string path){
+
+	ifstream file;
+
+	int line;
+
+	file.open(path.c_str());
+
+	if(file.is_open()){
+
+		file >> line;
+
+		return line;
+
+		file.close();
+
+	}
+
+	else
+
+	cout << "Unable to open file";
+
+} 
+
 
 static const int MAXPENDING = 5; // Maximum outstanding connection requests
 
@@ -69,8 +124,7 @@ int main(int argc, char *argv[]) {
   // Mark the socket so it will listen for incoming connections
   if (listen(servSock, MAXPENDING) < 0)
     DieWithSystemMessage("listen() failed");
-char* recv_buffer;
-  for (;;) { // Run forever
+
     struct sockaddr_in clntAddr; // Client address
     // Set length of client address structure (in-out parameter)
     socklen_t clntAddrLen = sizeof(clntAddr);
@@ -95,7 +149,45 @@ char* recv_buffer;
     Mat image;
 	
 	char* tosend;
+	char* recv_buffer;
+	string ADC_path = "/sys/class/saradc/ch0";
+	string button_path = "/sys/class/gpio/gpio228/value";
+	int lightIntensity,button_value;
+	const int min_intensity = 1000;
+	const int max_intensity = 200;
+	bool reset = 0;
+	bool reset_button = 0;
+	bool button_state;
+	time_t start;
+	int n_secondes = 5;
+	start=time(0);
+	int controle;
+	//ofstream Myfile("analyse.txt");
   while(true){
+	lightIntensity = getValue(ADC_path);
+	button_value = getValue(button_path);
+	if (button_value == 0){
+		button_state = true;
+	}
+	else{
+		button_state = false;
+		reset_button = true;
+	}
+	//Myfile << lightIntensity << endl;
+	if (time(0)-start > 0){
+		start = start + n_secondes;
+		cout << "Light intensity : " << lightIntensity << endl;
+	} 
+	if (lightIntensity < min_intensity && lightIntensity > max_intensity){
+	reset = 0;
+	if (button_state == true && reset_button == true){
+	controle = PUSHB;
+	reset_button = false;
+	}
+	else
+		controle = READY;
+	
+	sendInt(controle, tosend, clntSock);
 	
 	cap >> image;
 
@@ -113,25 +205,8 @@ char* recv_buffer;
 }
 	
 	
-int controle=0;
-recv_buffer = (char*)&controle;
-int remaining = sizeof(int);
-int received =0;
-int result = 0;
-while(remaining > 0){
-	result = recv(clntSock, recv_buffer+received, remaining,0);
-	if(result > 0){
-		remaining -= result;
-		received += result;
-	}
-	else if (result ==0){
-	}
-	else if (result < 0){
-		cout << "ERROR!" << endl;
-		break;
-	}
-	
-}
+controle=receiveInt(recv_buffer,clntSock);
+
 
 if (controle == QUIT){
 	  close(clntSock);
@@ -143,33 +218,39 @@ if (controle == QUIT){
 	  continue;
   }
 
-if (controle == 2){
+if (controle == RES01){
     cap.set(CV_CAP_PROP_FRAME_WIDTH, 320);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT,240);
 }
-if (controle == 3){
+if (controle == RES02){
     cap.set(CV_CAP_PROP_FRAME_WIDTH, 176);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT,144);
 
 }
 
-if (controle == 4){
+if (controle == RES03){
 	cap.set(CV_CAP_PROP_FRAME_WIDTH,960);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT,544);
 
 }
 
-if (controle == 5){
+if (controle == RES04){
 	cap.set(CV_CAP_PROP_FRAME_WIDTH,800);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT,600);
 
 }
-
+  }
+  else{
+	  if (reset == 0){
+		cout << "Light intensity too low!" << endl;
+		reset = 1;
+	  }
+	  controle = IDOWN;
+	  sendInt(controle, tosend, clntSock);
+  }
   }
   
-  break;
-
+exit(0);
   }
-  exit(0);
-}
+
 
