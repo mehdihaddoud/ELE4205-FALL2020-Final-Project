@@ -1,4 +1,4 @@
-#include <stdio.h>
+jo#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -13,7 +13,6 @@
 #include "Practical.h"
 #include "DieWithMessage.cpp"
 #include "AddressUtility.cpp"
-#include "captureImage.cpp"
 #define OK 1
 #define QUIT 0
 #define RES01 2
@@ -26,6 +25,8 @@
 
 using namespace std;
 using namespace cv;
+
+static const int MAXPENDING = 5; // Maximum outstanding connection requests
 
 void sendInt(int controle, char* tosend, int sock){
   	tosend = (char*)&(controle);
@@ -95,15 +96,8 @@ int getValue(string path){
 
 } 
 
-
-static const int MAXPENDING = 5; // Maximum outstanding connection requests
-
-int main(int argc, char *argv[]) {
-
-  if (argc != 2) // Test for correct number of arguments
-    DieWithUserMessage("Parameter(s)", "<Server Port>");
-
-  in_port_t servPort = atoi(argv[1]); // First arg:  local port
+int connectClient(int port_number){
+	  in_port_t servPort = port_number;
 
   // Create socket for incoming connections
   int servSock; // Socket descriptor for server
@@ -142,18 +136,30 @@ int main(int argc, char *argv[]) {
       printf("Handling client %s/%d\n", clntName, ntohs(clntAddr.sin_port));
     else
       puts("Unable to get client address");
+  
+  return clntSock;
+}
+
+
+
+int main(int argc, char *argv[]) {
+	
+	int port_number = 4099;
+	int clntSock = connectClient(port_number);
+  
 	VideoCapture cap(0);
 	if(!cap.isOpened()){
 		cout << "ERROR: Could not open camera" <<endl;
 	}
     Mat image;
-	
+	cap.set(CV_CAP_PROP_FRAME_WIDTH, 176); //fastest resolution
+        cap.set(CV_CAP_PROP_FRAME_HEIGHT,144); //fastest resolution
 	char* tosend;
 	char* recv_buffer;
 	string ADC_path = "/sys/class/saradc/ch0";
 	string button_path = "/sys/class/gpio/gpio228/value";
 	int lightIntensity,button_value;
-	const int min_intensity = 1000;
+	const int min_intensity = 950;
 	const int max_intensity = 200;
 	bool reset = 0;
 	bool reset_button = 0;
@@ -189,6 +195,7 @@ int main(int argc, char *argv[]) {
 	
 	sendInt(controle, tosend, clntSock);
 	
+	
 	cap >> image;
 
 	sendInt(image.rows, tosend,clntSock);
@@ -204,6 +211,15 @@ int main(int argc, char *argv[]) {
          cout<<"ERROR writing to socket";
 }
 	
+	if (controle == PUSHB){
+		
+		int id = fork();
+		
+		if (id == 0) {
+			char *args[] = {"./Server2",NULL};
+			execvp(args[0],args);
+		}  	
+	}	
 	
 controle=receiveInt(recv_buffer,clntSock);
 
@@ -251,6 +267,6 @@ if (controle == RES04){
   }
   
 exit(0);
-  }
+	  }
 
 

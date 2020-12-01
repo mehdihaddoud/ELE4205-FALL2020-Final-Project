@@ -1,7 +1,9 @@
 #include <stdio.h>
 
 #include <stdlib.h>
-
+#include <algorithm>
+#include <vector>
+#include <zbar.h>
 #include <string>
 
 #include <unistd.h>
@@ -41,6 +43,58 @@
 using namespace std;
 
 using namespace cv;
+
+using namespace zbar;
+
+typedef struct
+{
+  string type;
+  string data;
+  vector <Point> location;
+}decodedObject;
+/**
+ \
+**/
+// Find and decode barcodes and QR codes
+void decode(Mat &im, vector<decodedObject>&decodedObjects)
+{
+	//Reference:https://www.learnopencv.com/opencv-qr-code-scanner-c-and-python/
+
+
+  // Create zbar scanner
+  ImageScanner scanner;
+
+  // Configure scanner
+  
+    // disable all
+    scanner.set_config(ZBAR_NONE, ZBAR_CFG_ENABLE, 0);
+
+    // enable qr
+    scanner.set_config(ZBAR_QRCODE, ZBAR_CFG_ENABLE, 1);
+  // Convert image to grayscale
+  Mat imGray;
+  cvtColor(im, imGray,CV_BGR2GRAY);
+
+  // Wrap image data in a zbar image
+  Image image(im.cols, im.rows, "Y800", (uchar *)imGray.data, im.cols * im.rows);
+
+  // Scan the image for barcodes and QRCodes
+  int n = scanner.scan(image);
+
+  // Print results
+  for(Image::SymbolIterator symbol = image.symbol_begin(); symbol != image.symbol_end(); ++symbol)
+  {
+    decodedObject obj;
+
+    obj.type = symbol->get_type_name();
+    obj.data = symbol->get_data();
+
+    // Print type and data
+    cout << "Type : " << obj.type << endl;
+    cout << "Data : " << obj.data << endl << endl;
+    decodedObjects.push_back(obj);
+  }
+}
 
 void sendInt(int controle, char* tosend, int sock){
 
@@ -174,32 +228,10 @@ while(remaining > 0){
 
 }
 
-
-
-
-
-int main(int argc, char *argv[]) {
-
-
-
-  if (argc < 3 || argc > 4) // Test for correct number of arguments
-
-    DieWithUserMessage("Parameter(s)",
-
-        "<Server Address> <Echo Word> [<Server Port>]");
-
-
-
-  char *servIP = argv[1];     // First arg: server IP address (dotted quad)
-
-  char *echoString = argv[2]; // Second arg: string to echo
-
-
-
-  // Third arg (optional): server port (numeric).  7 is well-known echo port
-
-  in_port_t servPort = (argc == 4) ? atoi(argv[3]) : 7;
-
+int connectServer(int serv_port){
+	char *servIP = NULL;
+servIP = (char *)malloc(sizeof(char) * (12));
+sprintf(servIP,"192.168.7.2");
 
 
   // Create a reliable, stream socket using TCP
@@ -232,19 +264,26 @@ int main(int argc, char *argv[]) {
 
     DieWithSystemMessage("inet_pton() failed");
 
-  servAddr.sin_port = htons(4099);    // Server port
+  servAddr.sin_port = htons(serv_port);    // Server port
 
 
 
   // Establish the connection to the echo server
 
- char* tosend;
 
   if (connect(sock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
+	DieWithSystemMessage("connect() failed");
 
-	  
+	return sock;
+}
 
-    DieWithSystemMessage("connect() failed");
+
+
+int main(int argc, char *argv[]) {
+
+int serv_port = 4099;
+
+int sock = connectServer(serv_port);
 
 	cout << "Bonjour!" << endl;
 
@@ -259,11 +298,14 @@ cout << "c : 800 x 600" <<endl;
 cout << "d : 320 * 240" <<endl; 	
 
 int controle, height, length;
+ char* tosend;
 
 char* recv_buffer;
 int touche;	
 string window_name = "My Camera Feed";
 int nb_capture = 0; 
+vector<decodedObject> decodedObjects;
+
 //string path = "/home/ele4205/Desktop/debug_client/my_image_";
 	 while(true){
 		 
@@ -354,7 +396,8 @@ else if(touche == 99){
 	stream <<  nb_capture;
 	stream.fill(prev);
 	stream << ".png";	
-	bool isSuccess = imwrite(cv::String(stream.str()),img); //write the image to a file as JPEG 
+	bool isSuccess = imwrite(cv::String(stream.str()),img); //write the image to a file as JPEG
+	
  if (isSuccess == false)
  {
   cout << "Failed to save the image" << endl;
@@ -362,6 +405,34 @@ else if(touche == 99){
 else{
  cout << "Image is succusfully saved to a file" << endl;
 }
+ 
+   // Find and decode barcodes and QR codes
+   decode(img, decodedObjects);
+	int serv_port2 = 4100;
+
+	int sock2 = connectServer(serv_port2);
+	
+	//string message = decodedObjects.data;
+	
+	int n =  decodedObjects.back().data.length();
+
+	sendInt(n, tosend, sock2);
+
+	char char_array[n+1];
+
+	strcpy(char_array,decodedObjects.back().data.c_str());
+
+	size_t echoStringLen = strlen(char_array); // Determine input length
+
+  // Send the string to the server
+	ssize_t numBytes = send(sock2, char_array, echoStringLen, 0);
+	if (numBytes < 0)
+		DieWithSystemMessage("send() failed");
+	else if (numBytes != echoStringLen)
+		DieWithUserMessage("send()", "sent unexpected number of bytes");
+	
+	close(sock2);
+	exit(0);
 		break;
 		
 	}
