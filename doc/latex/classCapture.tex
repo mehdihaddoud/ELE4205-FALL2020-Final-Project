@@ -1,0 +1,249 @@
+\hypertarget{classCapture}{}\section{Capture Class Reference}
+\label{classCapture}\index{Capture@{Capture}}
+
+
+{\ttfamily \#include $<$Capture.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCapture_a97036b5d271238bd4852da79a0091b57}{Capture} ()
+\begin{DoxyCompactList}\small\item\em Constructeur de la classe Capture.\+Permet de creer un objet de la classe capture avec des parametres par defaut. \end{DoxyCompactList}\item 
+\hyperlink{classCapture_ab5b3fac467fa47592126d782f9375250}{$\sim$\+Capture} ()
+\begin{DoxyCompactList}\small\item\em Destructeur de la classe Capture.\+Libere automatiquement les donnees allouees par les conteneurs de la S\+TL. \end{DoxyCompactList}\item 
+int \hyperlink{classCapture_a05869e8d5be568abe1886affb37369f9}{get\+\_\+\+ResX} ()
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}acceder au contenu de la variable privee ResX d\textquotesingle{}un objet capture  la valeur de ResX. \end{DoxyCompactList}\item 
+int \hyperlink{classCapture_a3cde47ee01237a4cc85644b71ae05ff3}{get\+\_\+\+ResY} ()
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}acceder au contenu de la variable privee ResX d\textquotesingle{}un objet capture  la valeur de ResY. \end{DoxyCompactList}\item 
+double \hyperlink{classCapture_a149cf5ddb9d6b23cdc97988307695063}{get\+\_\+fps} ()
+\begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}acceder au nombre de frame par seconde qui est une variable privee  le nombre frame par seconde \end{DoxyCompactList}\item 
+void \hyperlink{classCapture_a16b9a470b73f5ff71e133ceaa861aeca}{set\+\_\+fps} (double F\+PS)
+\begin{DoxyCompactList}\small\item\em Permet de modifier le nombre de frame par seconde. \end{DoxyCompactList}\item 
+void \hyperlink{classCapture_ac521361beb13f870b235df51b02e4129}{set\+\_\+\+ResX} (int resX)
+\begin{DoxyCompactList}\small\item\em Permet de modifier la variable ResX. \end{DoxyCompactList}\item 
+void \hyperlink{classCapture_a7f70eda8e57772e14d04cd55e116ee77}{set\+\_\+\+ResY} (int resY)
+\begin{DoxyCompactList}\small\item\em Permet de modifier la variable ResY. \end{DoxyCompactList}\item 
+double \hyperlink{classCapture_a9ebad63e310f50a14a9ef2e08254a5c6}{cal\+\_\+tps} (int resX, int resY)
+\begin{DoxyCompactList}\small\item\em Permet de calculer la duree de capture d\textquotesingle{}une video. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classCapture_aa210af994a7df17b80392adc91103b7f}{ResX}
+\begin{DoxyCompactList}\small\item\em definit la largeur de l image ou de la video enregistree. \end{DoxyCompactList}\item 
+int \hyperlink{classCapture_a5075c034c091f4c0ab84ddc10b56cd6c}{ResY}
+\begin{DoxyCompactList}\small\item\em definit la longueur de l image ou de la video enregistree. \end{DoxyCompactList}\item 
+double \hyperlink{classCapture_a295749772bc738a4f2f0a6c6976474d1}{fps}
+\begin{DoxyCompactList}\small\item\em definit le nombre de frames par secondes de la video \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file Capture.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Capture@{Capture}!Capture@{Capture}}
+\index{Capture@{Capture}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{Capture()}{Capture()}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::\+Capture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_a97036b5d271238bd4852da79a0091b57}{}\label{classCapture_a97036b5d271238bd4852da79a0091b57}
+
+
+Constructeur de la classe Capture.\+Permet de creer un objet de la classe capture avec des parametres par defaut. 
+
+
+
+Definition at line 21 of file Capture.\+cpp.
+
+\index{Capture@{Capture}!````~Capture@{$\sim$\+Capture}}
+\index{````~Capture@{$\sim$\+Capture}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{$\sim$\+Capture()}{~Capture()}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::$\sim$\+Capture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_ab5b3fac467fa47592126d782f9375250}{}\label{classCapture_ab5b3fac467fa47592126d782f9375250}
+
+
+Destructeur de la classe Capture.\+Libere automatiquement les donnees allouees par les conteneurs de la S\+TL. 
+
+
+
+Definition at line 23 of file Capture.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Capture@{Capture}!cal\+\_\+tps@{cal\+\_\+tps}}
+\index{cal\+\_\+tps@{cal\+\_\+tps}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{cal\+\_\+tps(int res\+X, int res\+Y)}{cal_tps(int resX, int resY)}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::cal\+\_\+tps (
+\begin{DoxyParamCaption}
+\item[{int}]{resX, }
+\item[{int}]{resY}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_a9ebad63e310f50a14a9ef2e08254a5c6}{}\label{classCapture_a9ebad63e310f50a14a9ef2e08254a5c6}
+
+
+Permet de calculer la duree de capture d\textquotesingle{}une video. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & resX  suivant l\textquotesingle{}axe x de la video (longueur) \\
+\hline
+{\em int} & resY  suivant l\textquotesingle{}axe y de la video (largeur) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 38 of file Capture.\+cpp.
+
+\index{Capture@{Capture}!get\+\_\+fps@{get\+\_\+fps}}
+\index{get\+\_\+fps@{get\+\_\+fps}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{get\+\_\+fps()}{get_fps()}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::get\+\_\+fps (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_a149cf5ddb9d6b23cdc97988307695063}{}\label{classCapture_a149cf5ddb9d6b23cdc97988307695063}
+
+
+permet d\textquotesingle{}acceder au nombre de frame par seconde qui est une variable privee  le nombre frame par seconde 
+
+
+
+Definition at line 29 of file Capture.\+cpp.
+
+\index{Capture@{Capture}!get\+\_\+\+ResX@{get\+\_\+\+ResX}}
+\index{get\+\_\+\+ResX@{get\+\_\+\+ResX}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{get\+\_\+\+Res\+X()}{get_ResX()}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::get\+\_\+\+ResX (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_a05869e8d5be568abe1886affb37369f9}{}\label{classCapture_a05869e8d5be568abe1886affb37369f9}
+
+
+Permet d\textquotesingle{}acceder au contenu de la variable privee ResX d\textquotesingle{}un objet capture  la valeur de ResX. 
+
+
+
+Definition at line 25 of file Capture.\+cpp.
+
+\index{Capture@{Capture}!get\+\_\+\+ResY@{get\+\_\+\+ResY}}
+\index{get\+\_\+\+ResY@{get\+\_\+\+ResY}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{get\+\_\+\+Res\+Y()}{get_ResY()}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::get\+\_\+\+ResY (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_a3cde47ee01237a4cc85644b71ae05ff3}{}\label{classCapture_a3cde47ee01237a4cc85644b71ae05ff3}
+
+
+Permet d\textquotesingle{}acceder au contenu de la variable privee ResX d\textquotesingle{}un objet capture  la valeur de ResY. 
+
+
+
+Definition at line 27 of file Capture.\+cpp.
+
+\index{Capture@{Capture}!set\+\_\+fps@{set\+\_\+fps}}
+\index{set\+\_\+fps@{set\+\_\+fps}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{set\+\_\+fps(double F\+P\+S)}{set_fps(double FPS)}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::set\+\_\+fps (
+\begin{DoxyParamCaption}
+\item[{double}]{F\+PS}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_a16b9a470b73f5ff71e133ceaa861aeca}{}\label{classCapture_a16b9a470b73f5ff71e133ceaa861aeca}
+
+
+Permet de modifier le nombre de frame par seconde. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em double} & F\+PS  valeur de nombre de frame par seconde \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 35 of file Capture.\+cpp.
+
+\index{Capture@{Capture}!set\+\_\+\+ResX@{set\+\_\+\+ResX}}
+\index{set\+\_\+\+ResX@{set\+\_\+\+ResX}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{set\+\_\+\+Res\+X(int res\+X)}{set_ResX(int resX)}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::set\+\_\+\+ResX (
+\begin{DoxyParamCaption}
+\item[{int}]{resX}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_ac521361beb13f870b235df51b02e4129}{}\label{classCapture_ac521361beb13f870b235df51b02e4129}
+
+
+Permet de modifier la variable ResX. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & resX  valeur de ResX \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 31 of file Capture.\+cpp.
+
+\index{Capture@{Capture}!set\+\_\+\+ResY@{set\+\_\+\+ResY}}
+\index{set\+\_\+\+ResY@{set\+\_\+\+ResY}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{set\+\_\+\+Res\+Y(int res\+Y)}{set_ResY(int resY)}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::set\+\_\+\+ResY (
+\begin{DoxyParamCaption}
+\item[{int}]{resY}
+\end{DoxyParamCaption}
+)}\hypertarget{classCapture_a7f70eda8e57772e14d04cd55e116ee77}{}\label{classCapture_a7f70eda8e57772e14d04cd55e116ee77}
+
+
+Permet de modifier la variable ResY. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & resY  valeur de ResY \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 33 of file Capture.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Capture@{Capture}!fps@{fps}}
+\index{fps@{fps}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{fps}{fps}}]{\setlength{\rightskip}{0pt plus 5cm}double Capture\+::fps\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCapture_a295749772bc738a4f2f0a6c6976474d1}{}\label{classCapture_a295749772bc738a4f2f0a6c6976474d1}
+
+
+definit le nombre de frames par secondes de la video 
+
+
+
+Definition at line 33 of file Capture.\+h.
+
+\index{Capture@{Capture}!ResX@{ResX}}
+\index{ResX@{ResX}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{ResX}{ResX}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::\+ResX\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCapture_aa210af994a7df17b80392adc91103b7f}{}\label{classCapture_aa210af994a7df17b80392adc91103b7f}
+
+
+definit la largeur de l image ou de la video enregistree. 
+
+
+
+Definition at line 24 of file Capture.\+h.
+
+\index{Capture@{Capture}!ResY@{ResY}}
+\index{ResY@{ResY}!Capture@{Capture}}
+\subsubsection[{\texorpdfstring{ResY}{ResY}}]{\setlength{\rightskip}{0pt plus 5cm}Capture\+::\+ResY\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCapture_a5075c034c091f4c0ab84ddc10b56cd6c}{}\label{classCapture_a5075c034c091f4c0ab84ddc10b56cd6c}
+
+
+definit la longueur de l image ou de la video enregistree. 
+
+
+
+Definition at line 29 of file Capture.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+server/\hyperlink{Capture_8h}{Capture.\+h}\item 
+server/\hyperlink{Capture_8cpp}{Capture.\+cpp}\end{DoxyCompactItemize}

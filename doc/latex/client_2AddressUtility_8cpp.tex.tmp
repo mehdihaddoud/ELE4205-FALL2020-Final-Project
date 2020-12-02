@@ -1,0 +1,55 @@
+\hypertarget{client_2AddressUtility_8cpp}{}\section{client/\+Address\+Utility.cpp File Reference}
+\label{client_2AddressUtility_8cpp}\index{client/\+Address\+Utility.\+cpp@{client/\+Address\+Utility.\+cpp}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+Include dependency graph for Address\+Utility.\+cpp\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{client_2AddressUtility_8cpp_ac46a7bdd12ba8ea1a07068fd2ed676d7}{Print\+Socket\+Address} (const struct sockaddr $\ast$address, F\+I\+LE $\ast$stream)
+\item 
+bool \hyperlink{client_2AddressUtility_8cpp_a67072007eea5889d2f7a73ede5b21631}{Sock\+Addrs\+Equal} (const struct sockaddr $\ast$addr1, const struct sockaddr $\ast$addr2)
+\begin{DoxyCompactList}\small\item\em V´erifie si deux addresses de socket sont identiques. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{client/\+Address\+Utility.\+cpp@{client/\+Address\+Utility.\+cpp}!Print\+Socket\+Address@{Print\+Socket\+Address}}
+\index{Print\+Socket\+Address@{Print\+Socket\+Address}!client/\+Address\+Utility.\+cpp@{client/\+Address\+Utility.\+cpp}}
+\subsubsection[{\texorpdfstring{Print\+Socket\+Address(const struct sockaddr $\ast$address, F\+I\+L\+E $\ast$stream)}{PrintSocketAddress(const struct sockaddr *address, FILE *stream)}}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Socket\+Address (
+\begin{DoxyParamCaption}
+\item[{const struct sockaddr $\ast$}]{address, }
+\item[{F\+I\+LE $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{client_2AddressUtility_8cpp_ac46a7bdd12ba8ea1a07068fd2ed676d7}{}\label{client_2AddressUtility_8cpp_ac46a7bdd12ba8ea1a07068fd2ed676d7}
+
+
+Definition at line 6 of file Address\+Utility.\+cpp.
+
+\index{client/\+Address\+Utility.\+cpp@{client/\+Address\+Utility.\+cpp}!Sock\+Addrs\+Equal@{Sock\+Addrs\+Equal}}
+\index{Sock\+Addrs\+Equal@{Sock\+Addrs\+Equal}!client/\+Address\+Utility.\+cpp@{client/\+Address\+Utility.\+cpp}}
+\subsubsection[{\texorpdfstring{Sock\+Addrs\+Equal(const struct sockaddr $\ast$addr1, const struct sockaddr $\ast$addr2)}{SockAddrsEqual(const struct sockaddr *addr1, const struct sockaddr *addr2)}}]{\setlength{\rightskip}{0pt plus 5cm}Sock\+Addrs\+Equal (
+\begin{DoxyParamCaption}
+\item[{const struct sockaddr $\ast$}]{addr1, }
+\item[{const struct sockaddr $\ast$}]{addr2}
+\end{DoxyParamCaption}
+)}\hypertarget{client_2AddressUtility_8cpp_a67072007eea5889d2f7a73ede5b21631}{}\label{client_2AddressUtility_8cpp_a67072007eea5889d2f7a73ede5b21631}
+
+
+V´erifie si deux addresses de socket sont identiques. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & struct sockaddr $\ast$addr1  `a l\textquotesingle{}addresse du premier socket \\
+\hline
+{\em const} & struct sockaddr $\ast$addr2  `a l\textquotesingle{}addresse du premier socket \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 40 of file Address\+Utility.\+cpp.
+

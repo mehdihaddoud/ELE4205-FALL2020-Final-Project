@@ -53,7 +53,12 @@ typedef struct
   vector <Point> location;
 }decodedObject;
 /**
- \
+ \fn decode(Mat &im, vector<decodedObject>&decodedObjects)
+ \Permet de trouver et de decoder les codes bar et les codes QR
+ \param Mat &im
+ \reference a une image
+ \param vector<decodedObject>&decodedObjects
+ \Vecteur d'objets qui va contenir le type de donnees et les donnees decodees
 **/
 // Find and decode barcodes and QR codes
 void decode(Mat &im, vector<decodedObject>&decodedObjects)
@@ -61,24 +66,49 @@ void decode(Mat &im, vector<decodedObject>&decodedObjects)
 	//Reference:https://www.learnopencv.com/opencv-qr-code-scanner-c-and-python/
 
 
-  // Create zbar scanner
+/**
+  \brief objet de la classe ImageScanner permettant de creer un scanner de code zbar
+**/
   ImageScanner scanner;
 
   // Configure scanner
-  
+/**
+ \fn scanner.set_config(ZBAR_NONE, ZBAR_CFG_ENABLE, 0)
+ \brief configure le scanner et desactive
+**/  
     // disable all
     scanner.set_config(ZBAR_NONE, ZBAR_CFG_ENABLE, 0);
 
+/**
+ \fn scanner.set_config(ZBAR_NONE, ZBAR_CFG_ENABLE, 1)
+ \brief configure le scanner et active
+**/
     // enable qr
     scanner.set_config(ZBAR_QRCODE, ZBAR_CFG_ENABLE, 1);
+
   // Convert image to grayscale
+/**
+ /fn cvtColor(im, imGray,CV_BGR2GRAY)
+ /brief Permet de convertir l'image en format gray
+**/
   Mat imGray;
   cvtColor(im, imGray,CV_BGR2GRAY);
+
+/**
+ \image(im.cols, im.rows, "Y800", (uchar *)imGray.data, im.cols * im.rows)
+ \brief converti les donnees de l'image en format zbar image
+**/
 
   // Wrap image data in a zbar image
   Image image(im.cols, im.rows, "Y800", (uchar *)imGray.data, im.cols * im.rows);
 
   // Scan the image for barcodes and QRCodes
+
+
+/**
+ \Var  int n = scanner.scan(image)
+ \brief enregistre l'image pour codes bar et codes QR
+**/
   int n = scanner.scan(image);
 
   // Print results
@@ -96,6 +126,16 @@ void decode(Mat &im, vector<decodedObject>&decodedObjects)
   }
 }
 
+/**
+ \fn sendInt(int controle, char* tosend, int sock)
+ \brief Permet d envoyer des donnees au serveur au travers du socket
+ \param int controle
+ \ represente la quantite de donnee envoyees  a chaque envoie
+ \param char* tosend
+ \pointeur vers le premier caractere de la chaine de donnees a envoyer
+ \int sock
+ \ valeur du socket cote client
+**/
 void sendInt(int controle, char* tosend, int sock){
 
   	tosend = (char*)&(controle);
@@ -128,13 +168,19 @@ void sendInt(int controle, char* tosend, int sock){
 
 	}
 
-	}
-
-	
-
-	
-
+    }
 }
+/**
+ \fn  makeImage(int height, int length, int sock)
+ \brief Permet de creer une image avec les pixels de l'image capturee cote serveur
+ \param int height
+ \largeur de l'image
+ \param int length
+ \longueur de l'image
+ \param int sock
+ \valeur du socket cote client
+ \retourne l'image avec les pixels recus du serveur
+**/
 
 Mat makeImage(int height, int length, int sock){
 Mat img = Mat::zeros(height, length, CV_8UC3);
@@ -158,7 +204,6 @@ for (int i = bytes; i < imgSize; i += bytes) {
         cout << "Receive failed" << endl;
 
 		break;
-
     }
 
 }
@@ -182,7 +227,15 @@ for (int i = 0;  i < img.rows; i++) {
 return img;
 }
 
-
+/**
+ \fn receiveInt(char* recv_buffer, int sock)
+ \brief Permet de recevoir les donnees provenant du serveur
+ \param char* recv_buffer
+ \Pointeur vers le premier caractere de la chaine de donnees a recevoir
+ \param int sock
+ \valeur du socket
+ \retourne la taille des donnees recues
+**/
 
 int receiveInt(char* recv_buffer, int sock){ 
 
@@ -225,17 +278,26 @@ while(remaining > 0){
 }
 
 	return number;
-
 }
+
+/**
+ \fn connectServer(int serv_port)
+ \brief Permet au client de se connecter au serveur au travert du port
+ \param int serv_port
+ \parametre contenant le port du serveur
+ \retourne la valeur du socket
+**/
 
 int connectServer(int serv_port){
 	char *servIP = NULL;
 servIP = (char *)malloc(sizeof(char) * (12));
 sprintf(servIP,"192.168.7.2");
 
-
-  // Create a reliable, stream socket using TCP
-
+/**
+ \int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
+ \var sock
+ \brief Permet de creer un socket en utilisant une connexion TCP
+**/
   int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
   if (sock < 0)
@@ -243,8 +305,10 @@ sprintf(servIP,"192.168.7.2");
     DieWithSystemMessage("socket() failed");
 
 
-
-  // Construct the server address structure
+/**
+ \struct sockaddr_in servAddr
+ \brief structure contenant les attribut de l'adresse du client
+**/
 
   struct sockaddr_in servAddr;            // Server address
 
@@ -253,7 +317,9 @@ sprintf(servIP,"192.168.7.2");
   servAddr.sin_family = AF_INET;          // IPv4 address family
 
   // Convert address
-
+/**
+ \Converti l'adresse
+**/
   int rtnVal = inet_pton(AF_INET, servIP, &servAddr.sin_addr.s_addr);
 
   if (rtnVal == 0)
@@ -269,7 +335,10 @@ sprintf(servIP,"192.168.7.2");
 
 
   // Establish the connection to the echo server
-
+/**
+  \connect(sock, (struct sockaddr *) &servAddr, sizeof(servAddr))
+  \Etabli la connexion au serveur
+**/
 
   if (connect(sock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
 	DieWithSystemMessage("connect() failed");

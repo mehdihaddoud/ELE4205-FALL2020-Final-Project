@@ -1,0 +1,167 @@
+\hypertarget{TCPEchoServer4_8cpp}{}\section{server/\+T\+C\+P\+Echo\+Server4.cpp File Reference}
+\label{TCPEchoServer4_8cpp}\index{server/\+T\+C\+P\+Echo\+Server4.\+cpp@{server/\+T\+C\+P\+Echo\+Server4.\+cpp}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$opencv2/opencv.\+hpp$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}Practical.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Die\+With\+Message.\+cpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Address\+Utility.\+cpp\char`\"{}}\\*
+Include dependency graph for T\+C\+P\+Echo\+Server4.\+cpp\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_aba51915c87d64af47fb1cc59348961c9}{OK}~1
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_ad24e2b54375e12474e65ebf7175988fb}{Q\+U\+IT}~0
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_a41621e32d21dd071a8c88ddd0a3a48a0}{R\+E\+S01}~2
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_adf5196ca46145659d8ab7bfd5c030908}{R\+E\+S02}~3
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_aae884d30c0d70c6900e152fa2128aa09}{R\+E\+S03}~4
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_ae38d0ccc9f453cea96fb7535b2a65440}{R\+E\+S04}~5
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_ad1235d5ce36f7267285e82dccd428aa6}{R\+E\+A\+DY}~6
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_aa81e38311b5b1ea87664239c85b6d3db}{I\+D\+O\+WN}~7
+\item 
+\#define \hyperlink{TCPEchoServer4_8cpp_a09926ab335c60438202532ddbf0a910e}{P\+U\+S\+HB}~8
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{TCPEchoServer4_8cpp_a41719c9b9ca4c74a815b682676b6f36e}{send\+Int} (int controle, char $\ast$tosend, int sock)
+\item 
+int \hyperlink{TCPEchoServer4_8cpp_ab66a40ecbf2cb440533a357e4bab6c53}{receive\+Int} (char $\ast$recv\+\_\+buffer, int sock)
+\item 
+int \hyperlink{TCPEchoServer4_8cpp_a7fa8137b2332437ae65272ea2aa18d52}{get\+Value} (string path)
+\item 
+int \hyperlink{TCPEchoServer4_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!I\+D\+O\+WN@{I\+D\+O\+WN}}
+\index{I\+D\+O\+WN@{I\+D\+O\+WN}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{I\+D\+O\+WN}{IDOWN}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+D\+O\+WN~7}\hypertarget{TCPEchoServer4_8cpp_aa81e38311b5b1ea87664239c85b6d3db}{}\label{TCPEchoServer4_8cpp_aa81e38311b5b1ea87664239c85b6d3db}
+
+
+Definition at line 23 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!OK@{OK}}
+\index{OK@{OK}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{OK}{OK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define OK~1}\hypertarget{TCPEchoServer4_8cpp_aba51915c87d64af47fb1cc59348961c9}{}\label{TCPEchoServer4_8cpp_aba51915c87d64af47fb1cc59348961c9}
+
+
+Definition at line 16 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!P\+U\+S\+HB@{P\+U\+S\+HB}}
+\index{P\+U\+S\+HB@{P\+U\+S\+HB}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{P\+U\+S\+HB}{PUSHB}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+U\+S\+HB~8}\hypertarget{TCPEchoServer4_8cpp_a09926ab335c60438202532ddbf0a910e}{}\label{TCPEchoServer4_8cpp_a09926ab335c60438202532ddbf0a910e}
+
+
+Definition at line 24 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!Q\+U\+IT@{Q\+U\+IT}}
+\index{Q\+U\+IT@{Q\+U\+IT}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{Q\+U\+IT}{QUIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Q\+U\+IT~0}\hypertarget{TCPEchoServer4_8cpp_ad24e2b54375e12474e65ebf7175988fb}{}\label{TCPEchoServer4_8cpp_ad24e2b54375e12474e65ebf7175988fb}
+
+
+Definition at line 17 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!R\+E\+A\+DY@{R\+E\+A\+DY}}
+\index{R\+E\+A\+DY@{R\+E\+A\+DY}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{R\+E\+A\+DY}{READY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+A\+DY~6}\hypertarget{TCPEchoServer4_8cpp_ad1235d5ce36f7267285e82dccd428aa6}{}\label{TCPEchoServer4_8cpp_ad1235d5ce36f7267285e82dccd428aa6}
+
+
+Definition at line 22 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!R\+E\+S01@{R\+E\+S01}}
+\index{R\+E\+S01@{R\+E\+S01}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{R\+E\+S01}{RES01}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+S01~2}\hypertarget{TCPEchoServer4_8cpp_a41621e32d21dd071a8c88ddd0a3a48a0}{}\label{TCPEchoServer4_8cpp_a41621e32d21dd071a8c88ddd0a3a48a0}
+
+
+Definition at line 18 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!R\+E\+S02@{R\+E\+S02}}
+\index{R\+E\+S02@{R\+E\+S02}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{R\+E\+S02}{RES02}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+S02~3}\hypertarget{TCPEchoServer4_8cpp_adf5196ca46145659d8ab7bfd5c030908}{}\label{TCPEchoServer4_8cpp_adf5196ca46145659d8ab7bfd5c030908}
+
+
+Definition at line 19 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!R\+E\+S03@{R\+E\+S03}}
+\index{R\+E\+S03@{R\+E\+S03}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{R\+E\+S03}{RES03}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+S03~4}\hypertarget{TCPEchoServer4_8cpp_aae884d30c0d70c6900e152fa2128aa09}{}\label{TCPEchoServer4_8cpp_aae884d30c0d70c6900e152fa2128aa09}
+
+
+Definition at line 20 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!R\+E\+S04@{R\+E\+S04}}
+\index{R\+E\+S04@{R\+E\+S04}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{R\+E\+S04}{RES04}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+S04~5}\hypertarget{TCPEchoServer4_8cpp_ae38d0ccc9f453cea96fb7535b2a65440}{}\label{TCPEchoServer4_8cpp_ae38d0ccc9f453cea96fb7535b2a65440}
+
+
+Definition at line 21 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!get\+Value@{get\+Value}}
+\index{get\+Value@{get\+Value}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{get\+Value(string path)}{getValue(string path)}}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Value (
+\begin{DoxyParamCaption}
+\item[{string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPEchoServer4_8cpp_a7fa8137b2332437ae65272ea2aa18d52}{}\label{TCPEchoServer4_8cpp_a7fa8137b2332437ae65272ea2aa18d52}
+
+
+Definition at line 100 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!main@{main}}
+\index{main@{main}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPEchoServer4_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{}\label{TCPEchoServer4_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Definition at line 207 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!receive\+Int@{receive\+Int}}
+\index{receive\+Int@{receive\+Int}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{receive\+Int(char $\ast$recv\+\_\+buffer, int sock)}{receiveInt(char *recv_buffer, int sock)}}]{\setlength{\rightskip}{0pt plus 5cm}int receive\+Int (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{recv\+\_\+buffer, }
+\item[{int}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPEchoServer4_8cpp_ab66a40ecbf2cb440533a357e4bab6c53}{}\label{TCPEchoServer4_8cpp_ab66a40ecbf2cb440533a357e4bab6c53}
+
+
+Definition at line 77 of file T\+C\+P\+Echo\+Server4.\+cpp.
+
+\index{T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}!send\+Int@{send\+Int}}
+\index{send\+Int@{send\+Int}!T\+C\+P\+Echo\+Server4.\+cpp@{T\+C\+P\+Echo\+Server4.\+cpp}}
+\subsubsection[{\texorpdfstring{send\+Int(int controle, char $\ast$tosend, int sock)}{sendInt(int controle, char *tosend, int sock)}}]{\setlength{\rightskip}{0pt plus 5cm}void send\+Int (
+\begin{DoxyParamCaption}
+\item[{int}]{controle, }
+\item[{char $\ast$}]{tosend, }
+\item[{int}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPEchoServer4_8cpp_a41719c9b9ca4c74a815b682676b6f36e}{}\label{TCPEchoServer4_8cpp_a41719c9b9ca4c74a815b682676b6f36e}
+
+
+Definition at line 47 of file T\+C\+P\+Echo\+Server4.\+cpp.
+

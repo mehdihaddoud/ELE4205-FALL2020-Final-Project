@@ -1,0 +1,75 @@
+\hypertarget{server2_8cpp}{}\section{server2/server2.cpp File Reference}
+\label{server2_8cpp}\index{server2/server2.\+cpp@{server2/server2.\+cpp}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$opencv2/opencv.\+hpp$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}Practical.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Die\+With\+Message.\+cpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Address\+Utility.\+cpp\char`\"{}}\\*
+Include dependency graph for server2.\+cpp\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{server2_8cpp_ab66a40ecbf2cb440533a357e4bab6c53}{receive\+Int} (char $\ast$recv\+\_\+buffer, int sock)
+\item 
+string \hyperlink{server2_8cpp_a9477843ba625335b051a0b97e0ec6ad7}{morse\+Encode} (char x)
+\begin{DoxyCompactList}\small\item\em Permet de creer un son dont la frequence dpend du caractere qui a ete recu. \end{DoxyCompactList}\item 
+int \hyperlink{server2_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{server2.\+cpp@{server2.\+cpp}!main@{main}}
+\index{main@{main}!server2.\+cpp@{server2.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{server2_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{}\label{server2_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Definition at line 318 of file server2.\+cpp.
+
+\index{server2.\+cpp@{server2.\+cpp}!morse\+Encode@{morse\+Encode}}
+\index{morse\+Encode@{morse\+Encode}!server2.\+cpp@{server2.\+cpp}}
+\subsubsection[{\texorpdfstring{morse\+Encode(char x)}{morseEncode(char x)}}]{\setlength{\rightskip}{0pt plus 5cm}morse\+Encode (
+\begin{DoxyParamCaption}
+\item[{char}]{x}
+\end{DoxyParamCaption}
+)}\hypertarget{server2_8cpp_a9477843ba625335b051a0b97e0ec6ad7}{}\label{server2_8cpp_a9477843ba625335b051a0b97e0ec6ad7}
+
+
+Permet de creer un son dont la frequence dpend du caractere qui a ete recu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & x  le caractere qui a ete recu  une chaine de caractere qui sera traduite en frequence (ref Morse table) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 201 of file server2.\+cpp.
+
+\index{server2.\+cpp@{server2.\+cpp}!receive\+Int@{receive\+Int}}
+\index{receive\+Int@{receive\+Int}!server2.\+cpp@{server2.\+cpp}}
+\subsubsection[{\texorpdfstring{receive\+Int(char $\ast$recv\+\_\+buffer, int sock)}{receiveInt(char *recv_buffer, int sock)}}]{\setlength{\rightskip}{0pt plus 5cm}int receive\+Int (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{recv\+\_\+buffer, }
+\item[{int}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{server2_8cpp_ab66a40ecbf2cb440533a357e4bab6c53}{}\label{server2_8cpp_ab66a40ecbf2cb440533a357e4bab6c53}
+
+
+Definition at line 150 of file server2.\+cpp.
+

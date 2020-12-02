@@ -1,0 +1,82 @@
+\hypertarget{TCPServerUtility_8cpp}{}\section{server/\+T\+C\+P\+Server\+Utility.cpp File Reference}
+\label{TCPServerUtility_8cpp}\index{server/\+T\+C\+P\+Server\+Utility.\+cpp@{server/\+T\+C\+P\+Server\+Utility.\+cpp}}
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include $<$netdb.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Practical.\+h\char`\"{}}\\*
+Include dependency graph for T\+C\+P\+Server\+Utility.\+cpp\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{TCPServerUtility_8cpp_aa27b5647b005737cecc97dbf2de7e849}{Setup\+T\+C\+P\+Server\+Socket} (const char $\ast$service)
+\begin{DoxyCompactList}\small\item\em Permet de configurer le socket T\+CP du Serveur. \end{DoxyCompactList}\item 
+int \hyperlink{TCPServerUtility_8cpp_a73b7289def27d2edc46c83f073d54583}{Accept\+T\+C\+P\+Connection} (int serv\+Sock)
+\begin{DoxyCompactList}\small\item\em Accepte la connexion T\+CP du cot´e serveur au socket. \end{DoxyCompactList}\item 
+void \hyperlink{TCPServerUtility_8cpp_af1106bd14b4adbd9239ac33b224f3fb1}{Handle\+T\+C\+P\+Client} (int clnt\+Socket)
+\begin{DoxyCompactList}\small\item\em Permet de g´erer ou de configurer la connexion T\+CP cot´e client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{T\+C\+P\+Server\+Utility.\+cpp@{T\+C\+P\+Server\+Utility.\+cpp}!Accept\+T\+C\+P\+Connection@{Accept\+T\+C\+P\+Connection}}
+\index{Accept\+T\+C\+P\+Connection@{Accept\+T\+C\+P\+Connection}!T\+C\+P\+Server\+Utility.\+cpp@{T\+C\+P\+Server\+Utility.\+cpp}}
+\subsubsection[{\texorpdfstring{Accept\+T\+C\+P\+Connection(int serv\+Sock)}{AcceptTCPConnection(int servSock)}}]{\setlength{\rightskip}{0pt plus 5cm}int Accept\+T\+C\+P\+Connection (
+\begin{DoxyParamCaption}
+\item[{int}]{serv\+Sock}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPServerUtility_8cpp_a73b7289def27d2edc46c83f073d54583}{}\label{TCPServerUtility_8cpp_a73b7289def27d2edc46c83f073d54583}
+
+
+Accepte la connexion T\+CP du cot´e serveur au socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & serv\+Sock  cot´e serveur  la valeur du socket cot´e client \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 57 of file T\+C\+P\+Server\+Utility.\+cpp.
+
+\index{T\+C\+P\+Server\+Utility.\+cpp@{T\+C\+P\+Server\+Utility.\+cpp}!Handle\+T\+C\+P\+Client@{Handle\+T\+C\+P\+Client}}
+\index{Handle\+T\+C\+P\+Client@{Handle\+T\+C\+P\+Client}!T\+C\+P\+Server\+Utility.\+cpp@{T\+C\+P\+Server\+Utility.\+cpp}}
+\subsubsection[{\texorpdfstring{Handle\+T\+C\+P\+Client(int clnt\+Socket)}{HandleTCPClient(int clntSocket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Handle\+T\+C\+P\+Client (
+\begin{DoxyParamCaption}
+\item[{int}]{clnt\+Socket}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPServerUtility_8cpp_af1106bd14b4adbd9239ac33b224f3fb1}{}\label{TCPServerUtility_8cpp_af1106bd14b4adbd9239ac33b224f3fb1}
+
+
+Permet de g´erer ou de configurer la connexion T\+CP cot´e client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & clnt\+Socket  du socket cot´e client \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 76 of file T\+C\+P\+Server\+Utility.\+cpp.
+
+\index{T\+C\+P\+Server\+Utility.\+cpp@{T\+C\+P\+Server\+Utility.\+cpp}!Setup\+T\+C\+P\+Server\+Socket@{Setup\+T\+C\+P\+Server\+Socket}}
+\index{Setup\+T\+C\+P\+Server\+Socket@{Setup\+T\+C\+P\+Server\+Socket}!T\+C\+P\+Server\+Utility.\+cpp@{T\+C\+P\+Server\+Utility.\+cpp}}
+\subsubsection[{\texorpdfstring{Setup\+T\+C\+P\+Server\+Socket(const char $\ast$service)}{SetupTCPServerSocket(const char *service)}}]{\setlength{\rightskip}{0pt plus 5cm}int Setup\+T\+C\+P\+Server\+Socket (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{service}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPServerUtility_8cpp_aa27b5647b005737cecc97dbf2de7e849}{}\label{TCPServerUtility_8cpp_aa27b5647b005737cecc97dbf2de7e849}
+
+
+Permet de configurer le socket T\+CP du Serveur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char $\ast$service  vers le caract`ere qui repr´esente le num´ero de port  (-\/1) en cas d\textquotesingle{}´echec ou un socket valide pour le serveur \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file T\+C\+P\+Server\+Utility.\+cpp.
+

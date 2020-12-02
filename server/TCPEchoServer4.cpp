@@ -26,8 +26,24 @@ jo#include <stdio.h>
 using namespace std;
 using namespace cv;
 
+/**
+ \var  const int MAXPENDING
+ \ variable statique qui specifie la longueur de la file pour les connexions en attente
+
+**/
 static const int MAXPENDING = 5; // Maximum outstanding connection requests
 
+
+/**
+ \fn sendInt(int controle, char* tosend, int sock)
+ \brief Permet d envoyer des donnees au client au travers du socket
+ \param int controle
+ \ represente la quantite de donnee envoyees  a chaque envoie
+ \param char* tosend
+ \pointeur vers le premier caractere de la chaine de donnees a envoyer
+ \int sock
+ \ valeur du socket cote serveur
+**/
 void sendInt(int controle, char* tosend, int sock){
   	tosend = (char*)&(controle);
 	 int remaining = sizeof(int);
@@ -49,6 +65,15 @@ void sendInt(int controle, char* tosend, int sock){
 	
 }
 
+/**
+ \fn receiveInt(char* recv_buffer, int sock)
+ \brief Permet de recevoir les donn´ees envoy´ees par le client
+ \param char* recv_buffer
+ \Pointeur vers le premier caractere de la chaine de caracteres envoyees par le client
+ \int sock
+ \ numero de socket pour la connexion au client
+ \retourne le pointeur vers la prochaine chaine de caractere  a recevoir
+**/
 int receiveInt(char* recv_buffer, int sock){ 
 int number;	
 recv_buffer = (char*)&number;
@@ -96,14 +121,31 @@ int getValue(string path){
 
 } 
 
+/**
+ \fn connectClient(int port_number)
+ \brief Permet de creer un socket du cot´e client et le lie `a un port en attente de connexions avec un serveur
+ \param int port_number
+ \represente le numero de prot au travers duquel la connexion sera etablie
+ \retourne le socket connect´e au client
+**/
 int connectClient(int port_number){
 	  in_port_t servPort = port_number;
 
   // Create socket for incoming connections
+
+/**
+ \var int servSock
+ \Descripteur du socket cot´e serveur
+**/
   int servSock; // Socket descriptor for server
   if ((servSock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
     DieWithSystemMessage("socket() failed");
 
+
+/**
+ \struct  sockaddr_in servAddr
+ \brief Structure contenant les attributs de l'addresse du serveur local
+**/
   // Construct local address structure
   struct sockaddr_in servAddr;                  // Local address
   memset(&servAddr, 0, sizeof(servAddr));       // Zero out structure
@@ -111,25 +153,45 @@ int connectClient(int port_number){
   servAddr.sin_addr.s_addr = htonl(INADDR_ANY); // Any incoming interface
   servAddr.sin_port = htons(servPort);          // Local port
 
+
+/**
+ \liaison su socket a l'adresse locale
+**/
   // Bind to the local address
   if (bind(servSock, (struct sockaddr*) &servAddr, sizeof(servAddr)) < 0)
     DieWithSystemMessage("bind() failed");
 
-  // Mark the socket so it will listen for incoming connections
+
+/**
+  \Socket du serveur accepte les connexions
+**/
+  
   if (listen(servSock, MAXPENDING) < 0)
     DieWithSystemMessage("listen() failed");
 
     struct sockaddr_in clntAddr; // Client address
     // Set length of client address structure (in-out parameter)
+
+/**
+ \Modifie la taille du socket contenant l'addresse du client
+**/
     socklen_t clntAddrLen = sizeof(clntAddr);
 
-    // Wait for a client to connect
+
+/**
+ \Attend la connexion du client
+**/
     int clntSock = accept(servSock, (struct sockaddr *) &clntAddr, &clntAddrLen);
     if (clntSock < 0)
       DieWithSystemMessage("accept() failed");
 
-    // clntSock is connected to a client!
+   
 
+
+/**
+ \Var char clntName[INET_ADDRSTRLEN]
+ \chaine de caract`ere qui contient l'addresse du client
+**/
     char clntName[INET_ADDRSTRLEN]; // String to contain client address
     if (inet_ntop(AF_INET, &clntAddr.sin_addr.s_addr, clntName,
         sizeof(clntName)) != NULL)

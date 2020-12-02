@@ -60,9 +60,10 @@ int connectClient(int port_number){
 
     DieWithSystemMessage("socket() failed");
 
-
-
-  // Construct local address structure
+/**
+ \struct  sockaddr_in servAddr
+ \brief Structure contenant les attributs de l'addresse du serveur local
+**/
 
   struct sockaddr_in servAddr;                  // Local address
 
@@ -74,18 +75,18 @@ int connectClient(int port_number){
 
   servAddr.sin_port = htons(servPort);          // Local port
 
-
-
-  // Bind to the local address
+/**
+ \liaison su socket a l'adresse locale
+**/
 
   if (bind(servSock, (struct sockaddr*) &servAddr, sizeof(servAddr)) < 0)
 
     DieWithSystemMessage("bind() failed");
 
 
-
-  // Mark the socket so it will listen for incoming connections
-
+/**
+  \Socket du serveur accepte les connexions
+**/
   if (listen(servSock, MAXPENDING) < 0)
 
     DieWithSystemMessage("listen() failed");
@@ -94,14 +95,16 @@ int connectClient(int port_number){
 
     struct sockaddr_in clntAddr; // Client address
 
-    // Set length of client address structure (in-out parameter)
 
+/**
+ \Modifie la taille du socket contenant l'addresse du client
+**/
     socklen_t clntAddrLen = sizeof(clntAddr);
 
 
-
-    // Wait for a client to connect
-
+/**
+ \Attend la connexion du client
+**/
     int clntSock = accept(servSock, (struct sockaddr *) &clntAddr, &clntAddrLen);
 
     if (clntSock < 0)
@@ -113,7 +116,10 @@ int connectClient(int port_number){
     // clntSock is connected to a client!
 
 
-
+/**
+ \Var char clntName[INET_ADDRSTRLEN]
+ \chaine de caract`ere qui contient l'addresse du client
+**/
     char clntName[INET_ADDRSTRLEN]; // String to contain client address
 
 /*     if (inet_ntop(AF_INET, &clntAddr.sin_addr.s_addr, clntName,
@@ -132,6 +138,15 @@ int connectClient(int port_number){
 
 }
 
+/**
+ \fn receiveInt(char* recv_buffer, int sock)
+ \brief Permet de recevoir les donn´ees envoy´ees par le client
+ \param char* recv_buffer
+ \Pointeur vers le premier caractere de la chaine de caracteres envoyees par le client
+ \int sock
+ \ numero de socket pour la connexion au client
+ \retourne le pointeur vers la prochaine chaine de caractere  a recevoir
+**/
 int receiveInt(char* recv_buffer, int sock){ 
 
 int number;	
@@ -176,6 +191,13 @@ while(remaining > 0){
 
 }
 
+/**
+ \fn morseEncode(char x) 
+ \brief Permet de creer un son dont la frequence dpend du caractere qui a ete recu
+ \param char x
+ \represente le caractere qui a ete recu
+ \retourne une chaine de caractere qui sera traduite en frequence (ref Morse table)
+**/
 string morseEncode(char x) { 
   
   // refer to the Morse table 

@@ -1,0 +1,39 @@
+\hypertarget{TCPClientUtility_8cpp}{}\section{client/\+T\+C\+P\+Client\+Utility.cpp File Reference}
+\label{TCPClientUtility_8cpp}\index{client/\+T\+C\+P\+Client\+Utility.\+cpp@{client/\+T\+C\+P\+Client\+Utility.\+cpp}}
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$netdb.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Practical.\+h\char`\"{}}\\*
+Include dependency graph for T\+C\+P\+Client\+Utility.\+cpp\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{TCPClientUtility_8cpp_ab04052790aad51f95b05194c3bc8a9fb}{Setup\+T\+C\+P\+Client\+Socket} (const char $\ast$host, const char $\ast$service)
+\begin{DoxyCompactList}\small\item\em Permet de configurer le socket T\+CP du client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{T\+C\+P\+Client\+Utility.\+cpp@{T\+C\+P\+Client\+Utility.\+cpp}!Setup\+T\+C\+P\+Client\+Socket@{Setup\+T\+C\+P\+Client\+Socket}}
+\index{Setup\+T\+C\+P\+Client\+Socket@{Setup\+T\+C\+P\+Client\+Socket}!T\+C\+P\+Client\+Utility.\+cpp@{T\+C\+P\+Client\+Utility.\+cpp}}
+\subsubsection[{\texorpdfstring{Setup\+T\+C\+P\+Client\+Socket(const char $\ast$host, const char $\ast$service)}{SetupTCPClientSocket(const char *host, const char *service)}}]{\setlength{\rightskip}{0pt plus 5cm}int Setup\+T\+C\+P\+Client\+Socket (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{host, }
+\item[{const char $\ast$}]{service}
+\end{DoxyParamCaption}
+)}\hypertarget{TCPClientUtility_8cpp_ab04052790aad51f95b05194c3bc8a9fb}{}\label{TCPClientUtility_8cpp_ab04052790aad51f95b05194c3bc8a9fb}
+
+
+Permet de configurer le socket T\+CP du client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char $\ast$server  au serveur avec lequel la connexion va etre ´etablie  const char $\ast$service  vers le caract`ere qui repr´esente le num´ero de port  (-\/1) en cas d\textquotesingle{}´echec ou un socket valide pour le serveur \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 8 of file T\+C\+P\+Client\+Utility.\+cpp.
+
