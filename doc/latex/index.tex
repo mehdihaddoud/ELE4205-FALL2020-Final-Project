@@ -1,0 +1,45 @@
+\section*{Description du Projet}
+
+Ce projet est une application client/serveur dans lequel le serveur qui utlise l\textquotesingle{}Odroid-\/c2 pour capturer une image et envoie un unint32\+\_\+t au client via une connexion T\+C\+P/\+IP contenant un message\+:R\+E\+A\+DY, I\+D\+O\+WN ou P\+U\+S\+HB. Si le message envoyé est un R\+E\+A\+DY cela signifie qu\textquotesingle{}il y a de la lumière et on peut transférer l\textquotesingle{}image.\+Le client demande alors l\textquotesingle{}image et choisit la résolution dans laquelle il veut la recevoir en flux continu et peut changer de résolution à tout moment. Si le message envoyé est un I\+D\+O\+WN cela signifie qu\textquotesingle{}il n\textquotesingle{}y a pas de lumière et pas d\textquotesingle{}image disponible,le client ne demande pas d\textquotesingle{}image. Si le message envoyé est un P\+U\+S\+HB cela signifie qu\textquotesingle{}il y a de la lumière,que le boutton pression est enfoncé et une image est disponible, le client fait un fork()\+:le parent process affiche l\textquotesingle{}image comme dans le cas du R\+E\+A\+DY tandis que le child process devra faire de la détection de code QR et sauver l\textquotesingle{}image.\+Le client va se connecter sur un nouveau port(41000) pour envoyer le nombre de caractère dans le code QR reçu suivi de la chaine de caractères. Le nouveau serveur reçoit cette chaine de caratères et la joue en code morse I\+TU sur le buzzer.\+Après avoir terminé de jouer la chaine de caractères,le programme en code morse se termine.
+
+
+
+\section*{Technologies utilisées}
+
+La capture de l\textquotesingle{}image et la détection de al luminosité se font du côté serveur au travers d\textquotesingle{}un certains nombre d\textquotesingle{}équipements
+\begin{DoxyItemize}
+\item L\textquotesingle{}Odroid-\/c2 Il s\textquotesingle{}agit d\textquotesingle{}un ordinateur à carte unique développé par Hard\+Kernel et doté d\textquotesingle{}un processeur quad core 64 bits A\+RM Cortex-\/\+A53 , 2\+G\+Hz. il sert d\textquotesingle{}interface entre le serveur et le hardware du projet (camera, photorésistance, buzzer)
+\item Une caméra logitech (720p/30 ips) qui permet de capturer l\textquotesingle{}image en cas de luminosité
+\item un buzzer
+\item une photorésistance qui détecte le taux de luminosité
+\item un boutton poussoir dont l\textquotesingle{}état peut être lu par l\textquotesingle{}odroid via l\textquotesingle{}A\+DC et qui lorsqu\textquotesingle{}il est appuyé parmet au serveur sur l\textquotesingle{}Odroid d\textquotesingle{}envoyer le message P\+U\+S\+HB au client sur la ligne de commande linux.
+\end{DoxyItemize}
+
+\subsubsection*{Contribution au Projet}
+
+Nous avons été deux à réaliser ce projet -\/\+Essono Michel Wilfred -\/\+Mehdi Haddoud Avec l\textquotesingle{}assistance de \+: Étienne le chargé de laboratoires et de \+: Richard Gourdeau le professeur
+
+\subsubsection*{Références}
+
+Open\+CV Tutorial C++ \+:
+\begin{DoxyItemize}
+\item Open\+CV Tutorial C++
+\end{DoxyItemize}
+
+Site Beaglebone de Derek Molloy \+:
+\begin{DoxyItemize}
+\item Beaglebone\+: Video \hyperlink{classCapture}{Capture} and Image Processing on Embedded Linux using Open\+CV
+\item Streaming Video using R\+TP on the Beaglebone Black
+\end{DoxyItemize}
+
+Video for linux 2 (V4\+L2) \+: utilitaire de contrôle de parametres de webcam \+:
+\begin{DoxyItemize}
+\item Beaglebone Images, Video and Open\+CV
+\item Video for Linux Two A\+PI Specification
+\end{DoxyItemize}
+
+T\+C\+P/\+IP \+:
+\begin{DoxyItemize}
+\item T\+C\+P/\+IP Sockets in C (Second Edition) disponible en-\/ligne `a Polytechnique
+\item C++ Open\+CV image sending through socket 
+\end{DoxyItemize}
