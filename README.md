@@ -36,7 +36,8 @@ Ce projet est une application client/serveur dans lequel le serveur
  et de :
  Richard Gourdeau le professeur
  
- ### reférences
+### reférences
+ 
 OpenCV Tutorial C++ :
 — OpenCV Tutorial C++
 Site Beaglebone de Derek Molloy :
