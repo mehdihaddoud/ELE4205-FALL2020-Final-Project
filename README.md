@@ -2,8 +2,8 @@
 
 # Project description
 
-This is a TCP-IP application where an Odroid-c2 acts as a server that connects with a client (Virtual Machine under Linux Ubuntu). A camera and a button are connected to the Odroid-c2.
-Each 30 ms, the server sends 3 types of flags :
+This is a TCP-IP application where an Odroid-c2 acts as a server that connects with a client (Virtual Machine under Linux Ubuntu). A camera and a button are connected to the Odroid-c2. <br/>
+Each 30 ms, the server could send 3 types of flags depending on the environment in which the Odroid-c2 is :
 - READY : ambient light is sufficiently bright, the server sends an image.
 - IDOWN : ambient light is too low, the server does not send anything.
 - PUSHB : ambient light is sufficiently bright AND the button is pushed, the server sends an image.
