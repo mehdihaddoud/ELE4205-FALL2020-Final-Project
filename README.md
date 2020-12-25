@@ -16,7 +16,7 @@ When the server receives the data string, it plays the data string as Morse code
 
 # Steps to run the application
 
-In order to launch this application, make sure to have a functional Odroid-c2 that communicates though SSH with a system under Linux.
+In order to launch this application, make sure to have a functional Odroid-c2 that communicates through SSH with a system under Linux.
 You need to connect a camera compatible with Linux to the Odroid-c2. 
 You need to connect a photoresistor with the AIN0 pin of the Odroid-c2 (pin 40).
 You need to connect a switch button to GPIO #228 of the Odroid-c2 (pin 29).
