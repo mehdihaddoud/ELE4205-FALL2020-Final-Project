@@ -1,6 +1,6 @@
-#ELE4205 FALL2020 (#mainpage)
+# ELE4205 FALL2020 (#mainpage)
 
-#Project description
+# Project description
 
 This is a TCP-IP application where an Odroid-c2 acts as a server that connects with a client (Virtual Machine under Linux Ubuntu). A camera and a button are connected to the Odroid-c2.
 Each 30 ms, the server sends 3 types of flags :
@@ -16,7 +16,7 @@ When the server receives the data string, it plays the data string as Morse code
 
 \image html img.png
 
-#Steps to run the application
+# Steps to run the application
 
 In order to launch this application, make sure to have a functional Odroid-c2 that communicates though SSH with a system under Linux.
 You need to connect a camera compatible with Linux to the Odroid-c2. 
