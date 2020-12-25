@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.4)
-add_executable(Server TCPEchoServer4.cpp)
+project(Server)
+add_executable(Server Server.cpp)
 find_package(OpenCV REQUIRED)
 if(OpenCV_FOUND)
 	include_directories(${OpenCV_INCLUDE_DIRS})

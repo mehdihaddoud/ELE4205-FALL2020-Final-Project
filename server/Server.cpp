@@ -230,7 +230,6 @@ int main(int argc, char *argv[]) {
 	int n_secondes = 5;
 	start=time(0);
 	int controle;
-	//ofstream Myfile("analyse.txt");
   while(true){
 	lightIntensity = getValue(ADC_path);
 	button_value = getValue(button_path);
@@ -241,7 +240,6 @@ int main(int argc, char *argv[]) {
 		button_state = false;
 		reset_button = true;
 	}
-	//Myfile << lightIntensity << endl;
 	if (time(0)-start > 0){
 		start = start + n_secondes;
 		cout << "Light intensity : " << lightIntensity << endl;

@@ -375,7 +375,6 @@ string window_name = "My Camera Feed";
 int nb_capture = 0; 
 vector<decodedObject> decodedObjects;
 
-//string path = "/home/ele4205/Desktop/debug_client/my_image_";
 	 while(true){
 		 
 	controle = receiveInt(recv_buffer, sock);
@@ -481,7 +480,6 @@ else{
 
 	int sock2 = connectServer(serv_port2);
 	
-	//string message = decodedObjects.data;
 	
 	int n =  decodedObjects.back().data.length();
 

@@ -1,71 +1,60 @@
-# Projet Ele4205 Automne 2020	{#mainpage}
+#ELE4205 FALL2020 (#mainpage)
 
-# Description du Projet
+#Project description
 
-Ce projet est une application client/serveur dans lequel le serveur 
- qui utlise l'Odroid-c2 pour capturer une image et envoie un unint32_t
- au client via une connexion TCP/IP  contenant un message:READY, IDOWN ou PUSHB.
- Si le message envoyé est un READY cela signifie qu'il y a de la lumière et on peut transférer l'image.Le client demande alors l'image
- et choisit la résolution dans laquelle il veut la recevoir en flux continu et peut changer de résolution à tout moment.
- Si le message envoyé est un IDOWN cela signifie qu'il n'y a pas de lumière et pas d'image disponible,le client ne demande pas d'image.
- Si le message envoyé est un PUSHB cela signifie qu'il y a de la lumière,que le boutton pression est enfoncé et une image est disponible,
- le client fait un fork():le parent process affiche l'image comme dans le cas du READY tandis que le child process devra faire de la détection 
- de code QR et sauver l'image.Le client va se connecter sur un nouveau port(41000) pour envoyer 
- le nombre de caractère dans le code QR reçu suivi de la chaine de caractères.
- Le nouveau serveur reçoit cette chaine de caratères et la joue en code morse ITU sur le buzzer.Après avoir terminé de jouer la 
- chaine de caractères,le programme en code morse se termine.
+This is a TCP-IP application where an Odroid-c2 acts as a server that connects with a client (Virtual Machine under Linux Ubuntu). A camera and a button are connected to the Odroid-c2.
+Each 30 ms, the server sends 3 types of flags :
+READY : ambient light is sufficiently bright, the server sends an image.
+IDOWN : ambient light is too low, the server does not send anything.
+PUSHB : ambient light is sufficiently bright AND the button is pushed, the server sends an image.
+
+On the client side, each time an image is received, the client sends an acknowledgement to the server. When the acknowledgement is received by the server, the server sends the next image.
+
+After detecting a PUSHB flag, the client saves the received image in the Virtual Machine. Furthermore, if the image contains a QR code, the data string contained in the QR code will be sent to the server.
+
+When the server receives the data string, it plays the data string as Morse code by using a buffer.
 
 \image html img.png
 
-# Technologies utilisées
- La capture de l'image et la détection de al luminosité se font du côté serveur
- au travers d'un certains nombre d'équipements
-  - L'Odroid-c2
-  Il s'agit d'un ordinateur à carte unique développé par HardKernel et doté d'un processeur quad core 64 bits ARM Cortex-A53 , 2GHz.
-  il sert d'interface entre le serveur et le hardware du projet (camera, photorésistance, buzzer) 
-  - Une caméra logitech (720p/30 ips) qui permet de capturer l'image en cas de luminosité
-  - un buzzer
-  - une photorésistance qui détecte le taux de luminosité
-  - un boutton poussoir dont l'état peut être lu par l'odroid via l'ADC et qui lorsqu'il est appuyé parmet au serveur
-    sur l'Odroid d'envoyer le message PUSHB au client sur la ligne de commande linux.
+#Steps to run the application
 
-### Contribution au Projet
- Nous avons été deux à réaliser ce projet
- -Essono Michel Wilfred
- -Mehdi Haddoud
- Avec l'assistance de :
- Étienne le chargé de laboratoires
- et de :
- Richard Gourdeau le professeur
- 
-### Références
- 
-OpenCV Tutorial C++ :
-- OpenCV Tutorial C++
+In order to launch this application, make sure to have a functional Odroid-c2 that communicates though SSH with a system under Linux.
+You need to connect a camera compatible with Linux to the Odroid-c2. 
+You need to connect a photoresistor with the AIN0 pin of the Odroid-c2 (pin 40).
+You need to connect a switch button to GPIO #228 of the Odroid-c2 (pin 29).
+
+Open a terminal in the Odroid-c2 and execute the following commands to open the GPIO pin :
+1 - echo 228 > /sys/class/gpio/export
+2 - echo in > /sys/class/gpio/gpio228/direction
+
+In the same terminal, execute the following command to launch the server :
+
+./Server
+
+Open a terminal in the client side and execute the following command :
+
+./Client
+
+### Contribution
+This application was designed by two students of Polytechnique Montréal :
+- Mehdi Haddoud
+- Michel Wilfred Essono
+
+With the help of :
+The teaching assistant Étienne Beauchamp
+The course instructor Richard Gourdeau
+
+### References
+OpenCV tutorial C++ :
+- https://www.opencv-srf.com/p/introduction.html
 
 
-Site Beaglebone de Derek Molloy :
+Derek Molloy's website :
 - Beaglebone: Video Capture and Image Processing on Embedded Linux
   using OpenCV
 - Streaming Video using RTP on the Beaglebone Black
 
-Video for linux 2 (V4L2) : utilitaire de contrôle de parametres de webcam :
-- Beaglebone Images, Video and OpenCV
-- Video for Linux Two API Specification
-
 TCP/IP :
-- TCP/IP Sockets in C (Second Edition) disponible en-ligne `a Polytechnique
-- C++ OpenCV image sending through socket
- 
-  
+- TCP/IP Sockets in C (Second Edition)
 
-
-
-
-
-
-
-
-
-
-   
+- https://stackoverflow.com/questions/20314524/c-opencv-image-sending-through-socket
