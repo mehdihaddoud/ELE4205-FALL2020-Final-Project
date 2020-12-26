@@ -1,4 +1,4 @@
-# ELE4205 FALL2020 : FINAL PROJECT 
+# Vision system based on USB camera
 
 # Project description
 
